@@ -2,26 +2,28 @@ package com.automation.testcases;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import com.automation.pages.LoginPage;
+import com.automation.utility.BaseClass;
 import com.automation.utility.BrowserFactory;
+import com.automation.utility.ExcelDataProvider;
 
 /**
  * @Pallavi
  *
  */
-public class LoginTestCRM 
+public class LoginTestCRM extends BaseClass
 {
-	WebDriver driver;
-	
+		
 	@Test
 	public void loginApp() 
 	{
-		driver=BrowserFactory.startApplication(driver, "Chrome", "https://www.freecrm.com/index.html");
+		
 		LoginPage lp=PageFactory.initElements(driver, LoginPage.class);
-		lp.loginToCRM("Selenium_50","Abcd@123");
-		BrowserFactory.quitBrowser(driver);
+		lp.loginToCRM(excel.getStringData("Login", 0, 0),excel.getStringData("Login", 0, 1));
+		
 	}
 
 }
